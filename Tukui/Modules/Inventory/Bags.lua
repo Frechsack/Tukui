@@ -154,9 +154,10 @@ end
 function Bags:HideBlizzard()
 	local BankPortraitTexture = _G["BankPortraitTexture"]
 	local BankSlotsFrame = _G["BankSlotsFrame"]
+	local BankFrameTitleText = _G["BankFrameTitleText"]
 
 	BankPortraitTexture:Hide()
-
+	BankFrameTitleText:Hide()
 	BankFrame:EnableMouse(false)
 
 	for i = 1, 12 do
