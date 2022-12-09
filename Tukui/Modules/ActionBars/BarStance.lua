@@ -47,6 +47,9 @@ function ActionBars:CreateStanceBar()
 		local Button = _G["StanceButton"..i]
 		local FakeButton = CreateFrame("Frame", "TukuiStanceActionBarButton"..i, TukuiStanceBar)
 		
+		Button:SetFrameLevel(10)
+		FakeButton:SetFrameLevel(10)
+		
 		if not T.Retail then
 			Button:SetParent(Bar)
 		end
