@@ -231,6 +231,7 @@ Modules\PetBattles\Others.lua
 
 ## Themes
 Themes\T17\Load.lua
+Themes\TukzMod\Load.lua
 
 ## Others
 Core\Temp.lua
