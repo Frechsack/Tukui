@@ -21,6 +21,7 @@ C["General"] = {
 		["Options"] = {
 			["Tukui"] = "Tukui",
 			["Tukz"] = "Tukz",
+            ["TukzMod"] = "TukzMod"
 		},
 
 		["Value"] = "Tukui",
