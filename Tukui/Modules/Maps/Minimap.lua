@@ -213,9 +213,12 @@ function Minimap:StyleMinimap()
 				if T.BCC then
 					MiniMapTrackingBorder:Kill()
 				end
-
+				
+				MiniMapTracking:SetParent(Minimap)
 				MiniMapTracking:ClearAllPoints()
-				MiniMapTracking:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, 2)
+				MiniMapTracking:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 0, -2)
+
+				MiniMapTrackingButton:StripTextures()
 
 				if (MiniMapTrackingBorder) then
 					MiniMapTrackingBorder:Hide()
@@ -497,7 +500,7 @@ function Minimap:SizeMinimap()
 end
 
 function Minimap:TaxiExitOnEvent(event)
-	if T.Retail and CanExitVehicle() then
+	if (T.Retail or T.WotLK) and CanExitVehicle() then
 		if (UnitOnTaxi("player")) then
 			self.Text:SetText("|cffFF0000" .. TAXI_CANCEL .. "|r")
 		else
@@ -518,7 +521,7 @@ function Minimap:TaxiExitOnClick()
 	if (UnitOnTaxi("player")) then
 		TaxiRequestEarlyLanding()
 	else
-		if T.Retail then
+		if T.Retail or T.WotLK then
 			VehicleExit()
 		end
 	end

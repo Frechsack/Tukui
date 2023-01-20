@@ -28,7 +28,7 @@ local GetContainerNumFreeSlots = C_Container and C_Container.GetContainerNumFree
 local GetContainerItemInfo = C_Container and C_Container.GetContainerItemInfo or GetContainerItemInfo
 local SetItemSearch = C_Container and C_Container.SetItemSearch or SetItemSearch
 local SetSortBagsRightToLeft = C_Container and C_Container.SetSortBagsRightToLeft or SetSortBagsRightToLeft
-local SetInsertItemsLeftToRight = C_Container and C_Container.SetInsertItemsLeftToRight or SetSortBagsRightToLeft
+local SetInsertItemsLeftToRight = C_Container and C_Container.SetInsertItemsLeftToRight or SetInsertItemsLeftToRight
 local GetContainerItemCooldown = C_Container and C_Container.GetContainerItemCooldown or GetContainerItemCooldown
 
 BACKPACK_HEIGHT = 256
@@ -104,6 +104,7 @@ function Bags:SkinBagButton()
 		return
 	end
 
+	local NormalTexture = _G[self:GetName().."NormalTexture"]
 	local Icon = _G[self:GetName().."IconTexture"]
 	local Quest = _G[self:GetName().."IconQuestTexture"]
 	local Count = _G[self:GetName().."Count"]
@@ -114,6 +115,10 @@ function Bags:SkinBagButton()
 	self:SetFrameLevel(0)
 
 	Border:SetAlpha(0)
+	
+	if NormalTexture then
+		NormalTexture:SetAlpha(0)
+	end
 
 	Icon:SetTexCoord(unpack(T.IconCoord))
 	Icon:SetInside(self)
@@ -156,8 +161,15 @@ function Bags:HideBlizzard()
 	local BankSlotsFrame = _G["BankSlotsFrame"]
 	local BankFrameTitleText = _G["BankFrameTitleText"]
 
+<<<<<<< HEAD
 	BankPortraitTexture:Hide()
 	BankFrameTitleText:Hide()
+=======
+	if BankPortraitTexture then
+		BankPortraitTexture:Hide()
+	end
+
+>>>>>>> 63e27f650dcf68c9aa49a8c6f2878495fbf5e41a
 	BankFrame:EnableMouse(false)
 
 	for i = 1, 12 do
@@ -668,7 +680,7 @@ function Bags:SlotUpdate(id, button)
 
 	local _, Rarity, ItemLink, ItemID, IsBound, StackCount
 	
-	if T.Retail and T.TocVersion >= 100002 then
+	if (T.Retail and T.TocVersion >= 100002) or (T.WotLK) then
 		local Table = GetContainerItemInfo(id, button:GetID())
 
 		if Table then
@@ -1527,7 +1539,7 @@ function Bags:Enable()
 		ContainerFrame1.SetHeight = function() return end
 	end
 
-	if not T.Retail then
+	if (not T.Retail) or (not T.WotLK) then
 		ToggleAllBags()
 		ToggleAllBags()
 	end
