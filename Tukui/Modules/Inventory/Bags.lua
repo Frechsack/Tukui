@@ -1210,7 +1210,13 @@ end
 function Bags:OpenAllBankBags()
 	local Bank = BankFrame
 	local CustomPosition = TukuiDatabase.Variables[T.MyRealm][T.MyName].Move.TukuiBank
-
+	
+	local BankStartingBag = 5
+	
+	if T.Retail then
+		BankStartingBag = 6
+	end
+	
 	if Bank:IsShown() then
 		self.Bank:Show()
 
@@ -1229,7 +1235,7 @@ function Bags:OpenAllBankBags()
 			self.Bank.MoverApplied = true
 		end
 
-		for i = 5, T.Classic and 10 or 11 do
+		for i = BankStartingBag, T.Classic and 10 or 11 do
 			if (not IsBagOpen(i)) then
 
 				self:OpenBag(i, 1)
@@ -1418,11 +1424,11 @@ function Bags:Enable()
 
 	if C.Bags.SortToBottom then
 		SetSortBagsRightToLeft(false)
+		SetInsertItemsLeftToRight(false)
 	else
 		SetSortBagsRightToLeft(true)
+		SetInsertItemsLeftToRight(true)
 	end
-
-	SetInsertItemsLeftToRight(false)
 	
 	-- Bug with mouse click
 	GroupLootContainer:EnableMouse(false)
