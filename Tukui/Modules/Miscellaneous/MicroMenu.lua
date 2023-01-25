@@ -199,12 +199,20 @@ end
 
 function MicroMenu:Blizzard()
 	local Buttons = MicroMenu:ShownMicroButtons()
+	
+	if T.Retail then
+		local Bags = BagsBar
+		
+		Bags:SetParent(T.Hider)
+	end
 
 	MicroMenu:SetSize(210, 29)
 	MicroMenu:ClearAllPoints()
 	MicroMenu:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 
-	UpdateMicroButtonsParent(MicroMenu)
+	if UpdateMicroButtonsParent then
+		UpdateMicroButtonsParent(MicroMenu)
+	end
 
 	for i = 1, #Buttons do
 		local Button = _G[Buttons[i]]
@@ -212,12 +220,16 @@ function MicroMenu:Blizzard()
 
 		Button:SetParent(MicroMenu)
 		Button:ClearAllPoints()
+		
+		if T.Retail then
+			Button:SetScale(1.5)
+		end
 
 		-- Reposition them
 		if i == 1 then
 			Button:SetPoint("LEFT", MicroMenu, "LEFT", 0, 10)
 		else
-			Button:SetPoint("LEFT", PreviousButton, "RIGHT", -3, 0)
+			Button:SetPoint("LEFT", PreviousButton, "RIGHT", T.Retail and 0 or -3, 0)
 		end
 	end
 end
