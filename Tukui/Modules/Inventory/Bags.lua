@@ -161,8 +161,6 @@ function Bags:HideBlizzard()
 	local BankSlotsFrame = _G["BankSlotsFrame"]
 	local BankFrameTitleText = _G["BankFrameTitleText"]
 
-
-	BankPortraitTexture:Hide()
 	BankFrameTitleText:Hide()
 
 	if BankPortraitTexture then
