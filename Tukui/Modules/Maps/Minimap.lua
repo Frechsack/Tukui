@@ -63,9 +63,8 @@ function Minimap:DisableMinimapElements()
 	
 	if T.Retail then
 		-- Expansion panel
-		ExpansionLandingPageMinimapButton:SetParent(T.OffScreen)
-		ExpansionLandingPageMinimapButton:ClearAllPoints()
-		ExpansionLandingPageMinimapButton:SetPoint("CENTER")
+		ExpansionLandingPageMinimapButton:EnableMouse(false)
+		ExpansionLandingPageMinimapButton:SetAlpha(0)
 	end
 end
 
@@ -100,9 +99,9 @@ function Minimap:OnMouseClick(button)
 end
 
 function Minimap:StyleMinimap()
-	local Mail = MinimapCluster and MinimapCluster.MailFrame or MiniMapMailFrame
-	local MailBorder = MiniMapMailBorder
 	local MailIcon = MiniMapMailIcon
+	local Mail = (T.Retail and MiniMapMailIcon:GetParent()) or (MinimapCluster and MinimapCluster.MailFrame) or (MiniMapMailFrame)
+	local MailBorder = MiniMapMailBorder
 
 	self:SetMaskTexture(C.Medias.Blank)
 	self:CreateBackdrop()
@@ -116,6 +115,8 @@ function Minimap:StyleMinimap()
 	if Mail then
 		if T.Retail then
 			Mail:SetParent(Minimap)
+			
+			Minimap.Layout = function() return end
 		end
 		
 		Mail:ClearAllPoints()

@@ -94,7 +94,9 @@ function MicroMenu:Minimalist()
 	MicroMenu:ClearAllPoints()
 	MicroMenu:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -28, Y)
 
-	UpdateMicroButtonsParent(MicroMenu)
+	if UpdateMicroButtonsParent then
+		UpdateMicroButtonsParent(MicroMenu)
+	end
 
 	for i = 1, NumButtons do
 		local Button = _G[Buttons[i]]
@@ -156,6 +158,10 @@ function MicroMenu:GameMenu()
 		local Button = _G[Buttons[i]]
 		local PreviousButton = _G[Buttons[i - 1]]
 
+		if T.Retail then
+			Button:SetParent(MicroMenu)
+		end
+		
 		Button:StripTextures()
 		Button:SetAlpha(0)
 		Button:ClearAllPoints()
@@ -199,12 +205,6 @@ end
 
 function MicroMenu:Blizzard()
 	local Buttons = MicroMenu:ShownMicroButtons()
-	
-	if T.Retail then
-		local Bags = BagsBar
-		
-		Bags:SetParent(T.Hider)
-	end
 
 	MicroMenu:SetSize(210, 29)
 	MicroMenu:ClearAllPoints()
@@ -266,6 +266,14 @@ function MicroMenu:Enable()
 
 	MicroMenu:Hide()
 	MicroMenu:AddHooks()
+	
+	if T.Retail then
+		local Bags = BagsBar
+		local Toggle = BagBarExpandToggle
+		
+		Bags:SetParent(T.Hider)
+		Toggle:SetParent(T.Hider)
+	end
 
 	T.Movers:RegisterFrame(MicroMenu, "Micro Menu")
 
