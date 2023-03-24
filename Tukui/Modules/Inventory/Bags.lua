@@ -1,4 +1,4 @@
-local T, C, L = select(2, ...):unpack()
+local T, C, L = unpack((select(2, ...)))
 
 local Noop = function() end
 local ReplaceBags = 0
@@ -1424,7 +1424,7 @@ function Bags:Enable()
 
 	if C.Bags.SortToBottom then
 		SetSortBagsRightToLeft(false)
-		SetInsertItemsLeftToRight(true)
+		SetInsertItemsLeftToRight(T.WotLK and false or true)
 	else
 		SetSortBagsRightToLeft(true)
 		SetInsertItemsLeftToRight(false)

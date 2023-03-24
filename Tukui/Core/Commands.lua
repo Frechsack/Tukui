@@ -1,4 +1,4 @@
-local T, C, L = select(2, ...):unpack()
+local T, C, L = unpack((select(2, ...)))
 
 local AddOnCommands = {} -- Let people use /tukui for their mods
 local SelectedProfile = 0
@@ -45,31 +45,7 @@ T.SlashHandler = function(cmd)
 	elseif (arg1 == "mm") or (arg1 == "micromenu") then
 		local MicroMenu = T.Miscellaneous.MicroMenu
 
-		if MicroMenu:IsShown() then
-			MicroMenu:Hide()
-
-			UpdateMicroButtonsParent(T.Hider)
-
-			for i = 1, #MICRO_BUTTONS do
-				local Button = _G[MICRO_BUTTONS[i]]
-
-				if Button.Backdrop then
-					Button.Backdrop:Hide()
-				end
-			end
-		else
-			MicroMenu:Show()
-
-			for i = 1, #MICRO_BUTTONS do
-				local Button = _G[MICRO_BUTTONS[i]]
-
-				if Button.Backdrop then
-					Button.Backdrop:Show()
-				end
-			end
-
-			UpdateMicroButtonsParent(T.PetHider)
-		end
+		MicroMenu:Toggle()
 	elseif (arg1 == "ot") or (arg1 == "quests") then
 		if T.Retail then
 			if (ObjectiveTrackerFrame:IsVisible()) then
